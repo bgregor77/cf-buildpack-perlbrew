@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+
+# INITIALIZE ###########################################################
+
+# fail fast
+set -e
+
+# The script is run with four arguments:
+
+#   * The build directory for the app
+#   * The cache directory, which is a location the buildpack can use to store assets during the build process
+#   * The deps directory, which is where dependencies provided by all buildpacks are installed
+#   * The index, which is a number that represents the ordinal position of the buildpack
+
+BUILD_DIR=$1
+CACHE_DIR=$2
+DEPS_DIR=$3
+BP_INDEX=$4
+CONFIG_DIR=`cd $(dirname $0); cd ../conf; pwd`
+
+# FUNCTIONS ############################################################
+
+# MAIN #################################################################
+
+
+# Exists to satisfy buildpack version detection
