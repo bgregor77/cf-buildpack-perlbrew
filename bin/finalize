@@ -17,7 +17,6 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 DEPS_DIR=$3
 BP_INDEX=$4
-CONFIG_DIR=`cd $(dirname $0); cd ../conf; pwd`
 
 # FUNCTIONS ############################################################
 
