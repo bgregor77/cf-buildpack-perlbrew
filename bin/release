@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 # INITIALIZE ###########################################################
 
-# fail fast
-set -e
-
 # The script is run with one argument:
 
 #   * The build directory for the app
