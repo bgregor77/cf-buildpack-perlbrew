@@ -46,12 +46,12 @@ initialize_perlbrew () {
 }
 
 install_perl () {
-    ver = "5.29.3"
+    ver="5.29.3"
     if [ -z "$PERL_VERSION" ]
     then
         echo "**** No PERL_VERSION set using default"
     else
-        $ver = $PERL_VERSION
+        $ver=$PERL_VERSION
     fi
     echo "o--- Installing Perl v$ver"
     perlbrew install perl-$ver --notest
