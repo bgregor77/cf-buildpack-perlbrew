@@ -29,6 +29,7 @@ echo "CONFIG_DIR=$CONFIG_DIR"
 
 download_perlbrew () {
     echo "o--- Downloading perlbrew"
+    export PERLBREW_ROOT=$DEPS_DIR/$BP_INDEX/perlbrew
     curl -L https://install.perlbrew.pl | bash
 }
 
@@ -36,10 +37,10 @@ initialize_perlbrew () {
     echo "o--- Initializing perlbrew environment"
     
     # Update .profile to source perlbrew environment for future shells
-    echo "source ~/perl5/perlbrew/etc/bashrc" >> ~/.profile
+    # echo "source ~/perl5/perlbrew/etc/bashrc" >> ~/.profile
     
     # Do it now for this session as well
-    source ~/perl5/perlbrew/etc/bashrc
+    source $DEPS_DIR/$BP_INDEX/perlbrew/etc/bashrc
 
     perlbrew init
     
