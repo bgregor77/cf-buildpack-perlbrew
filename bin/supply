@@ -24,12 +24,11 @@ echo "DEPS_DIR=$DEPS_DIR"
 echo "BP_INDEX=$BP_INDEX"
 echo "CONFIG_DIR=$CONFIG_DIR"
 
-
 # FUNCTIONS ############################################################
 
 download_perlbrew () {
     echo "o--- Downloading perlbrew"
-    export PERLBREW_ROOT=$DEPS_DIR/$BP_INDEX/perlbrew
+    export PERLBREW_ROOT=$BUILD_DIR/perlbrew
     curl -L https://install.perlbrew.pl | bash
 }
 
@@ -40,8 +39,7 @@ initialize_perlbrew () {
     # echo "source ~/perl5/perlbrew/etc/bashrc" >> ~/.profile
     
     # Do it now for this session as well
-    source $DEPS_DIR/$BP_INDEX/perlbrew/etc/bashrc
-
+    source $BUILD_DIR/perlbrew/etc/bashrc
     perlbrew init
     
 }
@@ -68,7 +66,7 @@ install_modules () {
     for module in $PERL_MODULES
     do
         echo "o--- Installing $module"
-        cpanm   
+        cpanm $module  
     done
     fi
 }

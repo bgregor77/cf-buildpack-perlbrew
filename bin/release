@@ -1,7 +1,19 @@
 #!/usr/bin/env bash
+# INITIALIZE ###########################################################
+
+# fail fast
+set -e
+
+# The script is run with one argument:
+
+#   * The build directory for the app
+
+BUILD_DIR=$1
+
+echo "BUILD_DIR=$BUILD_DIR"
 
 cat <<EOF
 ---
 default_process_types:
-  web: source $DEPS_DIR/$BP_INDEX/perlbrew/etc/bashrc ; ./index.pl prefork --listen 'http://*:'$PORT
+  web: source $BUILD_DIR/perlbrew/etc/bashrc ; ./index.pl prefork --listen 'http://*:'$PORT
 EOF
