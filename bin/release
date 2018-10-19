@@ -5,12 +5,12 @@
 
 #   * The build directory for the app
 
-BUILD_DIR=$1
+# BUILD_DIR=$1
 
-echo "BUILD_DIR=$BUILD_DIR"
+#echo "BUILD_DIR=$BUILD_DIR"
 
 cat <<EOF
 ---
 default_process_types:
-  web: source $BUILD_DIR/perlbrew/etc/bashrc ; ./index.pl prefork --listen 'http://*:'$PORT
+  web: source /tmp/app/perlbrew/etc/bashrc ; ./index.pl prefork --listen 'http://*:'$PORT
 EOF
