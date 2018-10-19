@@ -46,7 +46,7 @@ initialize_perlbrew () {
 }
 
 install_perl () {
-    ver="5.29.3"
+    local ver="5.29.3"
     if [ -z "$PERL_VERSION" ]
     then
         echo "**** No PERL_VERSION set using default"
