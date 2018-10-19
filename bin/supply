@@ -1,0 +1,81 @@
+#!/usr/bin/env bash
+
+
+# INITIALIZE ###########################################################
+
+# fail fast
+set -e
+
+# The script is run with four arguments:
+
+#   * The build directory for the app
+#   * The cache directory, which is a location the buildpack can use to store assets during the build process
+#   * The deps directory, which is where dependencies provided by all buildpacks are installed
+#   * The index, which is a number that represents the ordinal position of the buildpack
+
+BUILD_DIR=$1
+CACHE_DIR=$2
+DEPS_DIR=$3
+BP_INDEX=$4
+CONFIG_DIR=`cd $(dirname $0); cd ../conf; pwd`
+
+echo "BUILD_DIR=$BUILD_DIR"
+echo "CACHE_DIR=$CACHE_DIR"
+echo "DEPS_DIR=$DEPS_DIR"
+echo "BP_INDEX=$BP_INDEX"
+echo "CONFIG_DIR=$CONFIG_DIR"
+
+
+# FUNCTIONS ############################################################
+
+download_perlbrew () {
+    echo "o--- Downloading perlbrew"
+    curl -L https://install.perlbrew.pl | bash
+}
+
+initialize_perlbrew () {    
+    echo "o--- Initializing perlbrew environment"
+    
+    # Update .profile to source perlbrew environment for future shells
+    echo "source ~/perl5/perlbrew/etc/bashrc" >> ~/.profile
+    
+    # Do it now for this session as well
+    source ~/perl5/perlbrew/etc/bashrc
+
+    perlbrew init
+    
+}
+
+install_perl () {
+    ver = "5.29.3"
+    if [ -z "$PERL_VERSION" ]
+    then
+        echo "**** No PERL_VERSION set using default"
+    else
+        ver = $PERL_VERSION
+    fi
+    echo "o--- Installing Perl v$ver"
+    perlbrew install perl-$ver --notest
+    perlbrew switch perl-$ver --notest
+    perlbrew install-cpanm --notest
+}
+
+install_modules () {
+    if [ -z "$PERL_MODULES" ]
+    then
+        echo "**** No PERL_MODULES defined"
+    else
+    for module in $PERL_MODULES
+    do
+        echo "o--- Installing $module"
+        cpanm   
+    done
+    fi
+}
+
+# MAIN #################################################################
+
+download_perlbrew
+initialize_perlbrew
+install_perl
+install_modules
