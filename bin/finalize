@@ -44,5 +44,4 @@ EOF
 
 # MAIN #################################################################
 
-
-# Exists to satisfy buildpack version detection
+generate_boot_script
