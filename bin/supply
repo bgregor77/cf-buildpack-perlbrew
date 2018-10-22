@@ -28,7 +28,7 @@ echo "CONFIG_DIR=$CONFIG_DIR"
 
 download_perlbrew () {
     echo "o--- Downloading perlbrew"
-    export PERLBREW_ROOT=$BUILD_DIR/perlbrew
+    export PERLBREW_ROOT=/home/vcap/perlbrew
     curl -L https://install.perlbrew.pl | bash
 }
 
@@ -39,7 +39,7 @@ initialize_perlbrew () {
     # echo "source ~/perl5/perlbrew/etc/bashrc" >> ~/.profile
     
     # Do it now for this session as well
-    source $BUILD_DIR/perlbrew/etc/bashrc
+    source /home/vcap/perlbrew/etc/bashrc
     perlbrew init
     
 }
@@ -71,9 +71,17 @@ install_modules () {
     fi
 }
 
+move_install() {
+    # Since /home/vcap will be overwritten after finalize with BUILD_DIR
+    # we need to move the install into place so it ends up back where we
+    # want it
+    mv /home/vcap/perlbrew $BUILD_DIR
+}
+
 # MAIN #################################################################
 
 download_perlbrew
 initialize_perlbrew
 install_perl
 install_modules
+move_install
