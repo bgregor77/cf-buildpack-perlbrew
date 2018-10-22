@@ -35,7 +35,7 @@ generate_boot_script () {
     cat >>boot.sh <<EOF
 #!/usr/bin/env bash
 export PERLBREW_ROOT=/home/vcap/app/perlbrew
-source $PERLBREW_ROOT/etc/bashrc
+source /home/vcap/app/perlbrew/etc/bashrc
 perlbrew switch perl-$ver
 ./index.pl prefork --listen 'http://*:'$PORT
 
