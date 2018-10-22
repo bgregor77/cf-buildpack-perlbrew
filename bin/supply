@@ -52,10 +52,20 @@ install_perl () {
     else
         ver=$PERL_VERSION
     fi
-    echo "o--- Installing Perl v$ver"
-    perlbrew install perl-$ver --notest
-    perlbrew switch perl-$ver --notest
-    perlbrew install-cpanm --notest
+
+    # Cached?
+    if [ -d $CACHE_DIR/perlbrew ]
+    then
+        echo "o--- Using Cached Perlbrew install"
+        cp -r $CACHE_DIR/perlbrew $PERLBREW_ROOT
+    else
+        echo "o--- Installing Perl v$ver"
+        perlbrew install perl-$ver --notest -j 5
+        perlbrew switch perl-$ver
+        perlbrew install-cpanm --notest -j 5
+    fi
+
+    
 }
 
 install_modules () {
@@ -71,10 +81,16 @@ install_modules () {
     fi
 }
 
-move_install() {
+cache_install () {
+    echo "o--- Cache install"
+    cp -r $PERLBREW_ROOT $CACHE_DIR
+}
+
+move_install () {
     # Since /home/vcap will be overwritten after finalize with BUILD_DIR
     # we need to move the install into place so it ends up back where we
     # want it
+    echo "o--- Move install to build dir"
     mv $PERLBREW_ROOT $BUILD_DIR
 }
 
@@ -84,4 +100,5 @@ download_perlbrew
 initialize_perlbrew
 install_perl
 install_modules
+cache_install
 move_install
