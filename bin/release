@@ -12,5 +12,5 @@
 cat <<EOF
 ---
 default_process_types:
-  web: source ~/perlbrew/etc/bashrc ; ./index.pl prefork --listen 'http://*:'$PORT
+  web: sh boot.sh
 EOF
