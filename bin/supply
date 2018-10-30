@@ -58,6 +58,8 @@ install_perl () {
     then
         echo "o--- Using Cached Perlbrew install"
         cp -r $CACHE_DIR/perlbrew $PERLBREW_ROOT
+        perlbrew switch perl-$ver
+        perlbrew install-cpanm --notest -j 5
     else
         echo "o--- Installing Perl v$ver"
         perlbrew install perl-$ver --notest -j 5
