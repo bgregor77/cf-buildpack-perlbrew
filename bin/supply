@@ -108,5 +108,5 @@ download_perlbrew
 initialize_perlbrew
 install_perl
 install_modules
-cache_install
+#cache_install
 move_install
