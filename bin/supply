@@ -54,19 +54,24 @@ install_perl () {
     fi
 
     # Cached?
-    if [ -d $CACHE_DIR/perlbrew ]
-    then
-        echo "o--- Using Cached Perlbrew install"
-        cp -r $CACHE_DIR/perlbrew $PERLBREW_ROOT
+    #if [ -d $CACHE_DIR/perlbrew ]
+    #then
+    #    echo "o--- Using Cached Perlbrew install"
+    #    cp -r $CACHE_DIR/perlbrew $PERLBREW_ROOT
+    #    perlbrew install perl-$ver --notest -j 5
+    #    perlbrew switch perl-$ver
+    #    perlbrew install-cpanm --notest -j 5
+    #else
+    #    echo "o--- Installing Perl v$ver"
+    #    perlbrew install perl-$ver --notest -j 5
+    #    perlbrew switch perl-$ver
+    #    perlbrew install-cpanm --notest -j 5
+    #fi
+
+    echo "o--- Installing Perl v$ver"
         perlbrew install perl-$ver --notest -j 5
         perlbrew switch perl-$ver
         perlbrew install-cpanm --notest -j 5
-    else
-        echo "o--- Installing Perl v$ver"
-        perlbrew install perl-$ver --notest -j 5
-        perlbrew switch perl-$ver
-        perlbrew install-cpanm --notest -j 5
-    fi
 
     
 }
